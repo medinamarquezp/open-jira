@@ -1,7 +1,12 @@
 import type { NextPage } from "next";
+import { MainLayout } from "../components/layouts/MainLayout";
 
 const Home: NextPage = () => {
-  return <h1>OpenJira</h1>;
+  return (
+    <MainLayout>
+      <h1>Contenido</h1>
+    </MainLayout>
+  );
 };
 
 export default Home;
