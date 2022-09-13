@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Box,
   Divider,
@@ -11,6 +12,7 @@ import {
 } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { UIContext } from "../../context/ui/UIContext";
 
 const NavOptions = [
   { label: "Tasks", icon: <AssignmentIcon /> },
@@ -18,8 +20,9 @@ const NavOptions = [
 ];
 
 export const Sidebar = () => {
+  const { toggleSidebar, isSidebarOpened } = useContext(UIContext);
   return (
-    <Drawer anchor="left" open={false} onClose={() => console.log("closed")}>
+    <Drawer anchor="left" open={isSidebarOpened} onClose={toggleSidebar}>
       <Box sx={{ width: 260 }}>
         <Typography variant="h5" sx={{ margin: "30px 10px 10px" }}>
           Menu
