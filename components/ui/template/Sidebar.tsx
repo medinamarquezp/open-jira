@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { UIContext } from "../../context/ui/UIContext";
+import { UIContext } from "../../../context/ui/UIContext";
 
 const NavOptions = [
   { label: "Tasks", icon: <AssignmentIcon /> },
