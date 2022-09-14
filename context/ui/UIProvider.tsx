@@ -16,7 +16,7 @@ export const UIProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(uiReducer, INITIAL_STATE);
 
   const toggleSidebar = () => {
-    dispatch({ type: "toggle-sidebar" });
+    dispatch({ type: "[UI] toggle-sidebar" });
   };
 
   return (
