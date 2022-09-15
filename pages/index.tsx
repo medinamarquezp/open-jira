@@ -13,9 +13,9 @@ import { EntriesList } from "../components/ui/entries/EntriesList";
 const Home: NextPage = () => {
   return (
     <MainLayout>
-      <EntriesList />
-      <EntriesList />
-      <EntriesList />
+      <EntriesList title="TODO" slug="todo" />
+      <EntriesList title="DOING" slug="doing" />
+      <EntriesList title="DONE" slug="done" />
     </MainLayout>
   );
 };
