@@ -1,9 +1,9 @@
 import { FC, PropsWithChildren } from "react";
 import Head from "next/head";
-import { Container } from "@mui/system";
+import { Grid } from "@mui/material";
+
 import { Header } from "../ui/template/Header";
 import { Sidebar } from "../ui/template/Sidebar";
-
 interface Props extends PropsWithChildren {
   title?: string;
 }
@@ -16,7 +16,16 @@ export const MainLayout: FC<Props> = ({ children, title = "OpenJira" }) => {
       </Head>
       <Header />
       <Sidebar />
-      <Container>{children}</Container>
+      <Grid
+        container
+        spacing={2}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        marginTop="1px"
+      >
+        {children}
+      </Grid>
     </>
   );
 };
