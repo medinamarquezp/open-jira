@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from "react";
 import Head from "next/head";
 
-import { Header } from "../ui/template/Header";
-import { Sidebar } from "../ui/template/Sidebar";
+import { Header } from "../template/Header";
+import { Sidebar } from "../template/Sidebar";
 interface Props extends PropsWithChildren {
   title?: string;
 }
