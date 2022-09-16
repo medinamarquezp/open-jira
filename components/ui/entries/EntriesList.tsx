@@ -1,8 +1,9 @@
 import { FC } from "react";
-import { Button, Grid, List, Paper, Typography } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { Grid, List, Paper, Typography } from "@mui/material";
+
 import { EntryCard } from "./EntryCard";
 import { NewEntryForm } from "./NewEntryForm";
+import { AddEntryButton } from "./AddEntryButton";
 
 interface Props {
   slug: string;
@@ -11,7 +12,7 @@ interface Props {
 
 export const EntriesList: FC<Props> = ({ slug, title }) => {
   return (
-    <Grid item xs={4}>
+    <Grid item xs={12} sm={6} md={4}>
       <div>
         <Paper
           sx={{
@@ -22,15 +23,7 @@ export const EntriesList: FC<Props> = ({ slug, title }) => {
         >
           <Typography variant="h6">{title}</Typography>
           <NewEntryForm />
-          <Button
-            variant="outlined"
-            fullWidth={true}
-            startIcon={<AddCircleOutlineIcon />}
-            color="info"
-            sx={{ marginTop: "0.5rem" }}
-          >
-            Agregar nueva tarjeta
-          </Button>
+          <AddEntryButton />
           <List>
             <EntryCard title="Hacer la compra" createdAt={Date.now()} />
           </List>
