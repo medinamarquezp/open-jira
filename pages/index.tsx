@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 
-import { MainLayout } from "../components/layouts/MainLayout";
-import { EntriesList } from "../components/ui/entries/EntriesList";
-import { EntriesContainer } from "../components/ui/entries/EntriesContainer";
+import { MainLayout } from "@/components/layouts/MainLayout";
+import { EntriesList } from "@/components/ui/entries/EntriesList";
+import { EntriesContainer } from "@/components/ui/entries/EntriesContainer";
 
 const Home: NextPage = () => {
   return (

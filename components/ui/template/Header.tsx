@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 
-import { UIContext } from "../../../context/ui/UIContext";
+import { UIContext } from "@/context/ui/UIContext";
 
 export const Header = () => {
   const { toggleSidebar } = useContext(UIContext);

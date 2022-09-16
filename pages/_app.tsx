@@ -1,7 +1,8 @@
 import type { AppProps } from "next/app";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { darkTheme } from "../themes/dark.theme";
-import { UIProvider } from "../context/ui/UIProvider";
+
+import { darkTheme } from "@/themes/dark.theme";
+import { UIProvider } from "@/context/ui/UIProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
