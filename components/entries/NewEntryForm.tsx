@@ -13,18 +13,24 @@ interface Props {
 export const NewEntryForm: FC<Props> = ({ status }) => {
   const { toggleState, toggleAddEntry, addEntry } = useContext(EntriesContext);
   const [content, setContent] = useState("");
+  const [hasError, setHasError] = useState(false);
   const display = toggleState[status] ? "inline" : "none";
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    hasError && setHasError(false);
     setContent(event.target.value);
   };
 
   const addNewEntry = () => {
-    addEntry(content, status);
-    setContent("");
-    toggleAddEntry(status);
+    if (content.length === 0) {
+      setHasError(true);
+    } else {
+      addEntry(content, status);
+      setContent("");
+      toggleAddEntry(status);
+    }
   };
 
   return (
@@ -35,6 +41,8 @@ export const NewEntryForm: FC<Props> = ({ status }) => {
         multiline
         autoFocus
         fullWidth
+        error={hasError}
+        helperText={hasError && "Debes escribir algo"}
         margin="normal"
         value={content}
         onChange={handleChange}
