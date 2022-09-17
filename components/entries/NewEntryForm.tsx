@@ -6,13 +6,13 @@ import { EntriesContext } from "@/context/entries/EntriesContext";
 import { Status } from "interfaces/EntriesInterfaces";
 
 interface Props {
-  slug: Status;
+  status: Status;
 }
 
-export const NewEntryForm: FC<Props> = ({ slug }) => {
+export const NewEntryForm: FC<Props> = ({ status }) => {
   const { toggleState, toggleAddEntry, addEntry } = useContext(EntriesContext);
   const [content, setContent] = useState("");
-  const display = toggleState[slug] ? "inline" : "none";
+  const display = toggleState[status] ? "inline" : "none";
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -21,9 +21,9 @@ export const NewEntryForm: FC<Props> = ({ slug }) => {
   };
 
   const addNewEntry = () => {
-    addEntry(content, slug);
+    addEntry(content, status);
     setContent("");
-    toggleAddEntry(slug);
+    toggleAddEntry(status);
   };
 
   return (
@@ -41,7 +41,7 @@ export const NewEntryForm: FC<Props> = ({ slug }) => {
         <Button
           variant="text"
           color="error"
-          onClick={() => toggleAddEntry(slug)}
+          onClick={() => toggleAddEntry(status)}
         >
           Cancelar
         </Button>

@@ -41,12 +41,17 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Entries] add-entry", payload });
   };
 
+  const getEntriesByStatus = (status: Status) => {
+    return state.entries.filter((entry) => entry.status === status);
+  };
+
   return (
     <EntriesContext.Provider
       value={{
         ...state,
         toggleAddEntry,
         addEntry,
+        getEntriesByStatus,
       }}
     >
       {children}

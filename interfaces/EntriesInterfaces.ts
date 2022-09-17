@@ -8,6 +8,7 @@ export interface EntriesContextInterface {
   entries: Entry[];
   toggleAddEntry: (payload: string) => void;
   addEntry: (content: string, status: Status) => void;
+  getEntriesByStatus: (status: Status) => Entry[];
 }
 
 export interface EntriesProviderInterface {

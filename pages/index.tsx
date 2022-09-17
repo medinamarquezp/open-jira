@@ -8,9 +8,9 @@ const Home: NextPage = () => {
   return (
     <MainLayout>
       <EntriesContainer>
-        <EntriesList title="TODO" slug="todo" />
-        <EntriesList title="DOING" slug="doing" />
-        <EntriesList title="DONE" slug="done" />
+        <EntriesList title="TODO" status="todo" />
+        <EntriesList title="DOING" status="doing" />
+        <EntriesList title="DONE" status="done" />
       </EntriesContainer>
     </MainLayout>
   );

@@ -19,7 +19,7 @@ export const entriesReducer = (
       return { ...state, isAddingEntry, toggleState };
     case "[Entries] add-entry":
       const entry = action.payload;
-      const entries = [...state.entries, entry];
+      const entries = [entry, ...state.entries];
       return { ...state, entries };
     default:
       return state;

@@ -6,15 +6,17 @@ import { NewEntryForm } from "./NewEntryForm";
 import { AddEntryButton } from "./AddEntryButton";
 
 import { EntriesContext } from "@/context/entries/EntriesContext";
+import { Status } from "interfaces/EntriesInterfaces";
 
 interface Props {
-  slug: string;
+  status: Status;
   title: string;
 }
 
-export const EntriesList: FC<Props> = ({ slug, title }) => {
-  const { toggleAddEntry, toggleState } = useContext(EntriesContext);
-  const display = !toggleState[slug] ? "inline-flex" : "none";
+export const EntriesList: FC<Props> = ({ status, title }) => {
+  const { toggleAddEntry, toggleState, getEntriesByStatus } =
+    useContext(EntriesContext);
+  const display = !toggleState[status] ? "inline-flex" : "none";
   return (
     <Grid item xs={12} sm={6} md={4}>
       <div>
@@ -26,13 +28,15 @@ export const EntriesList: FC<Props> = ({ slug, title }) => {
           }}
         >
           <Typography variant="h6">{title}</Typography>
-          <NewEntryForm slug={slug} />
+          <NewEntryForm status={status} />
           <AddEntryButton
             display={display}
-            onClick={() => toggleAddEntry(slug)}
+            onClick={() => toggleAddEntry(status)}
           />
           <List>
-            <EntryCard title="Hacer la compra" createdAt={Date.now()} />
+            {getEntriesByStatus(status).map(({ id, content, createdAt }) => (
+              <EntryCard key={id} content={content} createdAt={createdAt} />
+            ))}
           </List>
         </Paper>
       </div>
