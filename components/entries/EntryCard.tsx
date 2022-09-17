@@ -1,6 +1,7 @@
 import { DragEvent, FC, useContext } from "react";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { UIContext } from "@/context/ui/UIContext";
+import { distanteToNow } from "services/dates.service";
 
 interface Props {
   id: string;
@@ -33,7 +34,7 @@ export const EntryCard: FC<Props> = ({ id, content, createdAt }) => {
       </CardContent>
       <CardActions sx={{ justifyContent: "flex-end" }}>
         <Typography fontSize="0.8rem" color="darkgrey">
-          Hace 2 días
+          {distanteToNow(createdAt)}
         </Typography>
       </CardActions>
     </Card>
