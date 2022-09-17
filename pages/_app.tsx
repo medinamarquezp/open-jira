@@ -3,15 +3,18 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import { darkTheme } from "@/themes/dark.theme";
 import { UIProvider } from "@/context/ui/UIProvider";
+import { EntriesProvider } from "../context/entries/EntriesProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <UIProvider>
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </UIProvider>
+    <EntriesProvider>
+      <UIProvider>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </UIProvider>
+    </EntriesProvider>
   );
 }
 

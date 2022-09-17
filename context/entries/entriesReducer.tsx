@@ -1,6 +1,6 @@
-import { EntriesProviderInterface } from "./EntriesProvider";
+import { EntriesProviderInterface, toggleState } from "./EntriesProvider";
 
-type Action = { type: "[Entries] toggle-add-entry" };
+type Action = { type: "[Entries] toggle-add-entry"; payload: string };
 
 export const entriesReducer = (
   state: EntriesProviderInterface,
@@ -8,7 +8,13 @@ export const entriesReducer = (
 ) => {
   switch (action.type) {
     case "[Entries] toggle-add-entry":
-      return { ...state, isAddingEntry: !state.isAddingEntry };
+      const entrySlug = action.payload;
+      const toggleState = {
+        ...state.toggleState,
+        [entrySlug]: !state.toggleState[entrySlug],
+      };
+      const isAddingEntry = Object.values(toggleState).includes(true);
+      return { ...state, isAddingEntry, toggleState };
     default:
       return state;
   }
