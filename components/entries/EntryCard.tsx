@@ -27,7 +27,12 @@ export const EntryCard: FC<Props> = ({ id, content, createdAt }) => {
       draggable
       onDragStart={handleDragging}
       onDragEnd={handleDragEnd}
-      sx={{ padding: "0.5rem", margin: "10px 0", backgroundColor: "black" }}
+      sx={{
+        padding: "0.5rem",
+        margin: "10px 0",
+        backgroundColor: "black",
+        whiteSpace: "pre-line",
+      }}
     >
       <CardContent>
         <Typography fontSize="1rem">{content}</Typography>
