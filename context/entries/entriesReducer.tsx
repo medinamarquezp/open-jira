@@ -1,4 +1,4 @@
-import { EntriesProviderInterface, toggleState } from "./EntriesProvider";
+import { EntriesProviderInterface } from "interfaces/EntriesInterfaces";
 
 type Action = { type: "[Entries] toggle-add-entry"; payload: string };
 

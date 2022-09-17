@@ -1,11 +1,10 @@
 import { FC, PropsWithChildren, useReducer } from "react";
-import { EntriesContext, ToggleState } from "./EntriesContext";
+import { EntriesContext } from "./EntriesContext";
 import { entriesReducer } from "./entriesReducer";
-
-export interface EntriesProviderInterface {
-  isAddingEntry: boolean;
-  toggleState: ToggleState;
-}
+import {
+  EntriesProviderInterface,
+  ToggleState,
+} from "interfaces/EntriesInterfaces";
 
 export const toggleState: ToggleState = {
   todo: false,
