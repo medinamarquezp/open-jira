@@ -1,14 +1,25 @@
-import { FC } from "react";
+import { DragEvent, FC, useContext } from "react";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import { UIContext } from "@/context/ui/UIContext";
 
 interface Props {
+  id: string;
   content: string;
   createdAt: number;
 }
 
-export const EntryCard: FC<Props> = ({ content, createdAt }) => {
+export const EntryCard: FC<Props> = ({ id, content, createdAt }) => {
+  const { toggleDragging } = useContext(UIContext);
+
+  const handleDragging = (event: DragEvent<HTMLDivElement>) => {
+    event.dataTransfer.setData("entryId", id);
+    toggleDragging();
+  };
+
   return (
     <Card
+      draggable
+      onDragStart={handleDragging}
       sx={{ padding: "0.5rem", margin: "10px 0", backgroundColor: "black" }}
     >
       <CardContent>

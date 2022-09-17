@@ -9,6 +9,7 @@ export interface EntriesContextInterface {
   toggleAddEntry: (payload: string) => void;
   addEntry: (content: string, status: Status) => void;
   getEntriesByStatus: (status: Status) => Entry[];
+  updateEntry: (id: string, entry: PartialEntry) => void;
 }
 
 export interface EntriesProviderInterface {
@@ -23,3 +24,6 @@ export interface Entry {
   createdAt: number;
   status: Status;
 }
+
+export interface PartialEntry
+  extends Omit<Partial<Entry>, "id" | "createdAt"> {}

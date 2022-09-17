@@ -2,6 +2,7 @@ import { FC, useState, useContext, ChangeEvent } from "react";
 import { Box } from "@mui/system";
 import { Button, TextField } from "@mui/material";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
+
 import { EntriesContext } from "@/context/entries/EntriesContext";
 import { Status } from "interfaces/EntriesInterfaces";
 
@@ -32,6 +33,7 @@ export const NewEntryForm: FC<Props> = ({ status }) => {
         label="Nueva tarea"
         variant="outlined"
         multiline
+        autoFocus
         fullWidth
         margin="normal"
         value={content}

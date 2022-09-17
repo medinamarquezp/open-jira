@@ -8,6 +8,7 @@ import {
   EntriesProviderInterface,
   ToggleState,
   Status,
+  PartialEntry,
 } from "interfaces/EntriesInterfaces";
 
 export const toggleState: ToggleState = {
@@ -45,6 +46,10 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
     return state.entries.filter((entry) => entry.status === status);
   };
 
+  const updateEntry = (id: string, entry: PartialEntry) => {
+    dispatch({ type: "[Entries] update-entry", payload: { id, entry } });
+  };
+
   return (
     <EntriesContext.Provider
       value={{
@@ -52,6 +57,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
         toggleAddEntry,
         addEntry,
         getEntriesByStatus,
+        updateEntry,
       }}
     >
       {children}
