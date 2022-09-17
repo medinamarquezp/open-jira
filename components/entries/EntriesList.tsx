@@ -25,7 +25,7 @@ export const EntriesList: FC<Props> = ({ status, title }) => {
     event.preventDefault();
     const id = event.dataTransfer.getData("entryId");
     updateEntry(id, { status });
-    toggleDragging();
+    isDragging && toggleDragging();
   };
 
   return (

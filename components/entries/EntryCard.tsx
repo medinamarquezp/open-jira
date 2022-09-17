@@ -9,17 +9,23 @@ interface Props {
 }
 
 export const EntryCard: FC<Props> = ({ id, content, createdAt }) => {
-  const { toggleDragging } = useContext(UIContext);
+  const { toggleDragging, isDragging } = useContext(UIContext);
 
   const handleDragging = (event: DragEvent<HTMLDivElement>) => {
     event.dataTransfer.setData("entryId", id);
-    toggleDragging();
+    !isDragging && toggleDragging();
+  };
+
+  const handleDragEnd = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    isDragging && toggleDragging();
   };
 
   return (
     <Card
       draggable
       onDragStart={handleDragging}
+      onDragEnd={handleDragEnd}
       sx={{ padding: "0.5rem", margin: "10px 0", backgroundColor: "black" }}
     >
       <CardContent>
