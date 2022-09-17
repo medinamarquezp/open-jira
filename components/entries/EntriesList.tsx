@@ -1,4 +1,4 @@
-import { DragEvent, FC, useContext } from "react";
+import { DragEvent, FC, useContext, useMemo } from "react";
 import { Grid, List, Paper, Typography } from "@mui/material";
 
 import { EntryCard } from "./EntryCard";
@@ -18,7 +18,8 @@ export const EntriesList: FC<Props> = ({ status, title }) => {
   const { isDragging, toggleDragging } = useContext(UIContext);
   const { toggleAddEntry, toggleState, getEntriesByStatus, updateEntry } =
     useContext(EntriesContext);
-
+  const entries = getEntriesByStatus(status);
+  const memoEntries = useMemo(() => entries, [entries]);
   const display = !toggleState[status] ? "inline-flex" : "none";
 
   const dropHandler = (event: DragEvent<HTMLDivElement>) => {
@@ -51,7 +52,7 @@ export const EntriesList: FC<Props> = ({ status, title }) => {
             onClick={() => toggleAddEntry(status)}
           />
           <List>
-            {getEntriesByStatus(status).map(({ id, content, createdAt }) => (
+            {memoEntries.map(({ id, content, createdAt }) => (
               <EntryCard
                 key={id}
                 id={id}
