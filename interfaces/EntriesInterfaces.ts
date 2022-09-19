@@ -25,5 +25,4 @@ export interface Entry {
   status: Status;
 }
 
-export interface PartialEntry
-  extends Omit<Partial<Entry>, "id" | "createdAt"> {}
+export interface PartialEntry extends Omit<Partial<Entry>, "id"> {}

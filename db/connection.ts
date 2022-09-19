@@ -1,9 +1,12 @@
-import { connect } from "mongoose";
+import { connect, Mongoose } from "mongoose";
 
-const getConnection = async () => {
+export const getConnection = async (): Promise<Mongoose> => {
+  let connection!: Mongoose;
   try {
-    return await connect(process.env.MONGODB_PATH || "");
+    connection = await connect(process.env.MONGODB_PATH || "");
   } catch (error) {
     console.error(error);
+    throw new Error("Error on creating database connection");
   }
+  return connection;
 };
