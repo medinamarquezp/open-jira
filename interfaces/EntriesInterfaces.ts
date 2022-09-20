@@ -19,11 +19,11 @@ export interface EntriesProviderInterface {
 }
 
 export interface EntryInterface {
-  id: string;
+  _id: string;
   content: string;
   createdAt: number;
   status: Status;
 }
 
 export interface PartialEntryInterface
-  extends Omit<Partial<EntryInterface>, "id"> {}
+  extends Omit<Partial<EntryInterface>, "_id"> {}

@@ -52,10 +52,10 @@ export const EntriesList: FC<Props> = ({ status, title }) => {
             onClick={() => toggleAddEntry(status)}
           />
           <List>
-            {memoEntries.map(({ id, content, createdAt }) => (
+            {memoEntries.map(({ _id, content, createdAt }) => (
               <EntryCard
-                key={id}
-                id={id}
+                key={_id}
+                id={_id}
                 content={content}
                 createdAt={createdAt}
               />

@@ -33,7 +33,7 @@ export const entriesReducer = (
 
     case "[Entries] update-entry":
       const entryIndex = state.entries.findIndex(
-        (entry) => entry.id === action.payload.id
+        (entry) => entry._id === action.payload.id
       );
       const originalEntry = state.entries[entryIndex];
       state.entries[entryIndex] = {

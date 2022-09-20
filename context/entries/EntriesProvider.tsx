@@ -34,7 +34,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
 
   const addEntry = (content: string, status: Status) => {
     const payload: EntryInterface = {
-      id: uuidv4(),
+      _id: uuidv4(),
       createdAt: Date.now(),
       content,
       status,
