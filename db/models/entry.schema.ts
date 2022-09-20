@@ -13,4 +13,6 @@ const EntrySchema = new Schema({
   },
 });
 
-export const Entry = mongoose.model("Entry", EntrySchema);
+const Entry = mongoose.models.Entry || mongoose.model("Entry", EntrySchema);
+
+export default Entry;
