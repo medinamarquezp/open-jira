@@ -1,6 +1,6 @@
 import { Mongoose } from "mongoose";
 import { getConnection } from "db/connection";
-import { Entry } from "db/models/entry.schema";
+import Entry from "db/models/entry.schema";
 import { PartialEntry } from "interfaces/EntriesInterfaces";
 
 const entriesSeed: PartialEntry[] = [
@@ -34,6 +34,7 @@ export const seedEntries = async () => {
   let connection!: Mongoose;
   try {
     connection = await getConnection();
+    await Entry.deleteMany();
     await Entry.insertMany(entriesSeed);
     return { message: "Entries seeded successfully" };
   } catch (error) {
