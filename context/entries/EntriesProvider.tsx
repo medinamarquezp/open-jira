@@ -4,11 +4,11 @@ import { v4 as uuidv4 } from "uuid";
 import { EntriesContext } from "./EntriesContext";
 import { entriesReducer } from "./entriesReducer";
 import {
-  Entry,
+  EntryInterface,
   EntriesProviderInterface,
   ToggleState,
   Status,
-  PartialEntry,
+  PartialEntryInterface,
 } from "interfaces/EntriesInterfaces";
 
 export const toggleState: ToggleState = {
@@ -33,7 +33,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
   };
 
   const addEntry = (content: string, status: Status) => {
-    const payload: Entry = {
+    const payload: EntryInterface = {
       id: uuidv4(),
       createdAt: Date.now(),
       content,
@@ -46,7 +46,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
     return state.entries.filter((entry) => entry.status === status);
   };
 
-  const updateEntry = (id: string, entry: PartialEntry) => {
+  const updateEntry = (id: string, entry: PartialEntryInterface) => {
     dispatch({ type: "[Entries] update-entry", payload: { id, entry } });
   };
 

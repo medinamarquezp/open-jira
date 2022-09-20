@@ -5,24 +5,25 @@ export type ToggleState = { [status: string]: boolean };
 export interface EntriesContextInterface {
   isAddingEntry: boolean;
   toggleState: ToggleState;
-  entries: Entry[];
+  entries: EntryInterface[];
   toggleAddEntry: (payload: string) => void;
   addEntry: (content: string, status: Status) => void;
-  getEntriesByStatus: (status: Status) => Entry[];
-  updateEntry: (id: string, entry: PartialEntry) => void;
+  getEntriesByStatus: (status: Status) => EntryInterface[];
+  updateEntry: (id: string, entry: PartialEntryInterface) => void;
 }
 
 export interface EntriesProviderInterface {
   isAddingEntry: boolean;
   toggleState: ToggleState;
-  entries: Entry[];
+  entries: EntryInterface[];
 }
 
-export interface Entry {
+export interface EntryInterface {
   id: string;
   content: string;
   createdAt: number;
   status: Status;
 }
 
-export interface PartialEntry extends Omit<Partial<Entry>, "id"> {}
+export interface PartialEntryInterface
+  extends Omit<Partial<EntryInterface>, "id"> {}

@@ -1,9 +1,9 @@
 import { Mongoose } from "mongoose";
 import { getConnection } from "db/connection";
 import Entry from "db/models/entry.schema";
-import { PartialEntry } from "interfaces/EntriesInterfaces";
+import { PartialEntryInterface } from "interfaces/EntriesInterfaces";
 
-const entriesSeed: PartialEntry[] = [
+const entriesSeed: PartialEntryInterface[] = [
   {
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut enim at turpis rhoncus congue a et libero.",

@@ -1,15 +1,15 @@
 import {
   EntriesProviderInterface,
-  Entry,
-  PartialEntry,
+  EntryInterface,
+  PartialEntryInterface,
 } from "interfaces/EntriesInterfaces";
 
 type Action =
   | { type: "[Entries] toggle-add-entry"; payload: string }
-  | { type: "[Entries] add-entry"; payload: Entry }
+  | { type: "[Entries] add-entry"; payload: EntryInterface }
   | {
       type: "[Entries] update-entry";
-      payload: { id: string; entry: PartialEntry };
+      payload: { id: string; entry: PartialEntryInterface };
     };
 
 export const entriesReducer = (
@@ -39,7 +39,7 @@ export const entriesReducer = (
       state.entries[entryIndex] = {
         ...originalEntry,
         ...action.payload.entry,
-      } as Entry;
+      } as EntryInterface;
       return state;
 
     default:
