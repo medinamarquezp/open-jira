@@ -16,11 +16,13 @@ interface Props {
 
 export const EntriesList: FC<Props> = ({ status, title }) => {
   const { isDragging, toggleDragging } = useContext(UIContext);
-  const { toggleAddEntry, toggleState, getEntriesByStatus, updateEntry } =
+  const { entries, toggleAddEntry, toggleState, updateEntry } =
     useContext(EntriesContext);
-  const entries = getEntriesByStatus(status);
-  const memoEntries = useMemo(() => entries, [entries]);
   const display = !toggleState[status] ? "inline-flex" : "none";
+  const entriesByStatus = useMemo(
+    () => entries.filter((entry) => entry.status === status),
+    [entries, status]
+  );
 
   const dropHandler = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -52,7 +54,7 @@ export const EntriesList: FC<Props> = ({ status, title }) => {
             onClick={() => toggleAddEntry(status)}
           />
           <List>
-            {memoEntries.map(({ _id, content, createdAt }) => (
+            {entriesByStatus.map(({ _id, content, createdAt }) => (
               <EntryCard
                 key={_id}
                 id={_id}

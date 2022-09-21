@@ -8,7 +8,6 @@ export interface EntriesContextInterface {
   entries: EntryInterface[];
   toggleAddEntry: (payload: string) => void;
   addEntry: (content: string, status: Status) => void;
-  getEntriesByStatus: (status: Status) => EntryInterface[];
   updateEntry: (id: string, entry: PartialEntryInterface) => void;
 }
 

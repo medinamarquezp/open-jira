@@ -10,7 +10,8 @@ type Action =
   | {
       type: "[Entries] update-entry";
       payload: { id: string; entry: PartialEntryInterface };
-    };
+    }
+  | { type: "[Entries] refresh-entries"; payload: EntryInterface[] };
 
 export const entriesReducer = (
   state: EntriesProviderInterface,
@@ -41,7 +42,8 @@ export const entriesReducer = (
         ...action.payload.entry,
       } as EntryInterface;
       return state;
-
+    case "[Entries] refresh-entries":
+      return { ...state, entries: action.payload };
     default:
       return state;
   }
