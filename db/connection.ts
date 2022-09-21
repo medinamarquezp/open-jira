@@ -1,12 +1,37 @@
-import { connect, Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
-export const getConnection = async (): Promise<Mongoose> => {
-  let connection!: Mongoose;
-  try {
-    connection = await connect(process.env.MONGODB_PATH || "");
-  } catch (error) {
-    console.error(error);
-    throw new Error("Error on creating database connection");
+/**
+ * 0 = disconnected
+ * 1 = connected
+ * 2 = connecting
+ * 3 = disconnecting
+ */
+const mongoConnection = {
+  isConnected: 0,
+};
+
+export const connect = async () => {
+  if (mongoConnection.isConnected) {
+    console.log("connect: MongoDB already connected");
+    return;
   }
-  return connection;
+  if (mongoose.connections.length > 0) {
+    mongoConnection.isConnected = mongoose.connections[0].readyState;
+    if (mongoConnection.isConnected === 1) {
+      console.log("connect: Using previous connection");
+      return;
+    }
+    await mongoose.disconnect();
+  }
+  await mongoose.connect(process.env.MONGO_URL || "");
+  mongoConnection.isConnected = 1;
+  console.log("connect: Connected to MongoDB - ", process.env.MONGO_URL);
+};
+
+export const disconnect = async () => {
+  if (process.env.NODE_ENV === "development") return;
+  if (mongoConnection.isConnected === 0) return;
+  await mongoose.disconnect();
+  mongoConnection.isConnected = 0;
+  console.log("disconnect: MongoDB disconnected");
 };
