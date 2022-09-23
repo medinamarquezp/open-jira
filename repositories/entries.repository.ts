@@ -7,17 +7,18 @@ import {
 
 export const getEntryList = async (where = {}): Promise<EntryInterface[]> => {
   await connect();
-  const entries = await Entry.find<EntryInterface>(where, "-__v").exec();
+  const entries = await Entry.find<EntryInterface>(where, "-__v")
+    .sort({ createdAt: -1 })
+    .exec();
   await disconnect();
   return entries;
 };
 
-export const createEntry = async (
-  entry: PartialEntryInterface
-): Promise<void> => {
+export const createEntry = async (entry: PartialEntryInterface) => {
   await connect();
-  await Entry.create(entry);
+  const createdEntry = new Entry(entry);
   await disconnect();
+  return await createdEntry.save();
 };
 
 export const updateEntry = async (

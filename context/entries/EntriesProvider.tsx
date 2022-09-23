@@ -1,16 +1,14 @@
 import { FC, PropsWithChildren, useEffect, useReducer } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 import { EntriesContext } from "./EntriesContext";
 import { entriesReducer } from "./entriesReducer";
 import {
-  EntryInterface,
   EntriesProviderInterface,
   ToggleState,
   Status,
   PartialEntryInterface,
 } from "interfaces/EntriesInterfaces";
-import { getEntries } from "api/entries/entries.api";
+import { getEntriesApi, createEntryApi } from "api/entries/entries.api";
 
 export const toggleState: ToggleState = {
   todo: false,
@@ -33,14 +31,12 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Entries] toggle-add-entry", payload });
   };
 
-  const addEntry = (content: string, status: Status) => {
-    const payload: EntryInterface = {
-      _id: uuidv4(),
-      createdAt: Date.now(),
+  const addEntry = async (content: string, status: Status) => {
+    const payload = await createEntryApi({
       content,
       status,
-    };
-    dispatch({ type: "[Entries] add-entry", payload });
+    });
+    await dispatch({ type: "[Entries] add-entry", payload });
   };
 
   const updateEntry = (id: string, entry: PartialEntryInterface) => {
@@ -48,7 +44,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
   };
 
   const refreshEntries = async () => {
-    const entries = await getEntries();
+    const entries = await getEntriesApi();
     dispatch({ type: "[Entries] refresh-entries", payload: entries });
   };
 

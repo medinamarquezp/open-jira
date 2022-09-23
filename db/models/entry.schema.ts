@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import { EntryInterface } from "interfaces/EntriesInterfaces";
+import mongoose, { Model } from "mongoose";
 const { Schema } = mongoose;
 
 const EntrySchema = new Schema({
@@ -13,6 +14,7 @@ const EntrySchema = new Schema({
   },
 });
 
-const Entry = mongoose.models.Entry || mongoose.model("Entry", EntrySchema);
+const Entry: Model<EntryInterface> =
+  mongoose.models.Entry || mongoose.model("Entry", EntrySchema);
 
 export default Entry;

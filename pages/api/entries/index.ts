@@ -13,8 +13,8 @@ export default async function getEntries(
     case "POST":
       const { content, status: newStatus } = req.body;
       const entry = { content, status: newStatus, createdAt: Date.now() };
-      await createEntry(entry);
-      return res.status(201).json({ message: "Entry created successfully" });
+      const createdEntry = await createEntry(entry);
+      return res.status(201).json({ ...createdEntry });
     default:
       return res.status(404).json({ name: "Resource not found" });
   }
