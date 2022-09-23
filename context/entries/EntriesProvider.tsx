@@ -8,7 +8,11 @@ import {
   Status,
   PartialEntryInterface,
 } from "interfaces/EntriesInterfaces";
-import { getEntriesApi, createEntryApi } from "api/entries/entries.api";
+import {
+  getEntriesApi,
+  createEntryApi,
+  updateEntryApi,
+} from "api/entries/entries.api";
 
 export const toggleState: ToggleState = {
   todo: false,
@@ -39,7 +43,9 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
     await dispatch({ type: "[Entries] add-entry", payload });
   };
 
-  const updateEntry = (id: string, entry: PartialEntryInterface) => {
+  const updateEntry = async (id: string, entry: PartialEntryInterface) => {
+    await updateEntryApi(id, entry);
+    await refreshEntries();
     dispatch({ type: "[Entries] update-entry", payload: { id, entry } });
   };
 

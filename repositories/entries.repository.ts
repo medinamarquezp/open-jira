@@ -22,7 +22,7 @@ export const createEntry = async (entry: PartialEntryInterface) => {
 };
 
 export const updateEntry = async (
-  _id: number,
+  _id: string,
   entry: PartialEntryInterface
 ): Promise<void> => {
   await connect();

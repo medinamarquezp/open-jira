@@ -21,3 +21,11 @@ export const createEntryApi = async (
   delete createdEntry.__v;
   return createdEntry;
 };
+
+export const updateEntryApi = async (
+  id: string,
+  data: PartialEntryInterface
+) => {
+  const path = `/entries/${id}`;
+  await client.patch(path, data);
+};

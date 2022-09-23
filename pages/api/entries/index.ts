@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getEntryList, createEntry } from "repositories/entries.repository";
 
-export default async function getEntries(
+export default async function entries(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
