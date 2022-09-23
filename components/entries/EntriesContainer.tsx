@@ -1,16 +1,18 @@
 import { PropsWithChildren, FC } from "react";
 import { Grid } from "@mui/material";
 
-interface Props extends PropsWithChildren {}
+interface Props extends PropsWithChildren {
+  centered?: boolean;
+}
 
-export const EntriesContainer: FC<Props> = ({ children }) => {
+export const EntriesContainer: FC<Props> = ({ children, centered = false }) => {
   return (
     <Grid
       container
       spacing={2}
       direction="row"
-      justifyContent={{ xs: "flex-start", md: "center" }}
-      alignItems={{ xs: "flex-start", md: "center" }}
+      justifyContent={{ xs: centered ? "center" : "flex-start", md: "center" }}
+      alignItems={{ xs: centered ? "center" : "flex-start", md: "center" }}
       marginTop="1px"
     >
       {children}
