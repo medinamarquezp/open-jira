@@ -13,12 +13,15 @@ import { EntryInterface } from "interfaces/EntriesInterfaces";
 import { getEntryById } from "repositories/entries.repository";
 import { EntryContainer } from "@/components/entry/EntryContainer";
 import { EntryActionsButtons } from "@/components/entry/EntryActionsButtons";
+import { EntryStatusSelector } from "@/components/entry/EntryStatusSelector";
 
 interface Props {
   entry: EntryInterface;
 }
 
-const Entry: NextPage<Props> = ({ entry: { _id, content, createdAt } }) => {
+const Entry: NextPage<Props> = ({
+  entry: { _id, content, status, createdAt },
+}) => {
   const [entryContent, setEntryContent] = useState(content);
 
   const handleChange = (
@@ -43,6 +46,7 @@ const Entry: NextPage<Props> = ({ entry: { _id, content, createdAt } }) => {
             margin="normal"
           />
         </CardContent>
+        <EntryStatusSelector status={status} />
         <EntryActionsButtons id={_id} content={entryContent} />
       </EntryContainer>
     </MainLayout>
