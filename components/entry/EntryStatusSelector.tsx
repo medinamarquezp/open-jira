@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import {
   FormControl,
   FormControlLabel,
@@ -10,13 +10,12 @@ import { Status } from "interfaces/EntriesInterfaces";
 
 interface Props {
   status: Status;
+  setStatus: Dispatch<SetStateAction<Status>>;
 }
 
-export const EntryStatusSelector: FC<Props> = ({ status }) => {
-  const [value, setValue] = useState<Status>(status);
-
+export const EntryStatusSelector: FC<Props> = ({ status, setStatus }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value as Status);
+    setStatus(event.target.value as Status);
   };
 
   return (
@@ -26,7 +25,7 @@ export const EntryStatusSelector: FC<Props> = ({ status }) => {
         row
         aria-labelledby="status-label"
         name="status-label"
-        value={value}
+        value={status}
         onChange={handleChange}
       >
         <FormControlLabel value="todo" control={<Radio />} label="Todo" />

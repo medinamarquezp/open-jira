@@ -9,7 +9,7 @@ import { CardContent, CardHeader, TextField } from "@mui/material";
 
 import { distanteToNow } from "services/dates.service";
 import { MainLayout } from "@/components/layouts/MainLayout";
-import { EntryInterface } from "interfaces/EntriesInterfaces";
+import { EntryInterface, Status } from "interfaces/EntriesInterfaces";
 import { getEntryById } from "repositories/entries.repository";
 import { EntryContainer } from "@/components/entry/EntryContainer";
 import { EntryActionsButtons } from "@/components/entry/EntryActionsButtons";
@@ -22,6 +22,7 @@ interface Props {
 const Entry: NextPage<Props> = ({
   entry: { _id, content, status, createdAt },
 }) => {
+  const [entryStatus, setEntryStatus] = useState<Status>(status);
   const [entryContent, setEntryContent] = useState(content);
 
   const handleChange = (
@@ -46,7 +47,7 @@ const Entry: NextPage<Props> = ({
             margin="normal"
           />
         </CardContent>
-        <EntryStatusSelector status={status} />
+        <EntryStatusSelector status={entryStatus} setStatus={setEntryStatus} />
         <EntryActionsButtons id={_id} content={entryContent} />
       </EntryContainer>
     </MainLayout>
