@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { isValidObjectId } from "mongoose";
 import type {
   NextPage,
   GetServerSideProps,
@@ -51,16 +52,18 @@ const Entry: NextPage<Props> = ({ entry: { _id, content, createdAt } }) => {
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const id = context?.params?.id as string;
-  const entry = await getEntryById(id);
-  if (!entry) {
+  const redirect = () => {
     return {
       redirect: {
         destination: "/",
         permanent: false,
       },
     };
-  }
+  };
+  const id = context?.params?.id as string;
+  if (!isValidObjectId(id)) return redirect();
+  const entry = await getEntryById(id);
+  if (!entry) return redirect();
   return {
     props: {
       entry: JSON.parse(JSON.stringify(entry)),
