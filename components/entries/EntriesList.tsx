@@ -1,5 +1,5 @@
 import { DragEvent, FC, useContext, useMemo } from "react";
-import { Grid, List, Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 
 import { EntryCard } from "./EntryCard";
 import { NewEntryForm } from "./NewEntryForm";
@@ -53,16 +53,14 @@ export const EntriesList: FC<Props> = ({ status, title }) => {
             display={display}
             onClick={() => toggleAddEntry(status)}
           />
-          <List>
-            {entriesByStatus.map(({ _id, content, createdAt }) => (
-              <EntryCard
-                key={_id}
-                id={_id}
-                content={content}
-                createdAt={createdAt}
-              />
-            ))}
-          </List>
+          {entriesByStatus.map(({ _id, content, createdAt }) => (
+            <EntryCard
+              key={_id}
+              id={_id}
+              content={content}
+              createdAt={createdAt}
+            />
+          ))}
         </Paper>
       </div>
     </Grid>
