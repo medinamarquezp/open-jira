@@ -5,6 +5,15 @@ import {
   PartialEntryInterface,
 } from "interfaces/EntriesInterfaces";
 
+export const getEntryById = async (
+  _id: string
+): Promise<EntryInterface | null> => {
+  await connect();
+  const entry = await Entry.findOne<EntryInterface>({ _id }, "-__v");
+  await disconnect();
+  return entry;
+};
+
 export const getEntryList = async (where = {}): Promise<EntryInterface[]> => {
   await connect();
   const entries = await Entry.find<EntryInterface>(where, "-__v")
