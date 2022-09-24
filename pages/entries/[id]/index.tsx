@@ -1,17 +1,20 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { isValidObjectId } from "mongoose";
 import type {
   NextPage,
   GetServerSideProps,
   GetServerSidePropsContext,
 } from "next";
+import { useRouter } from "next/router";
+
 import { CardContent, CardHeader, TextField } from "@mui/material";
 
 import { distanteToNow } from "services/dates.service";
 import { MainLayout } from "@/components/layouts/MainLayout";
-import { EntryInterface, Status } from "interfaces/EntriesInterfaces";
 import { getEntryById } from "repositories/entries.repository";
+import { EntriesContext } from "@/context/entries/EntriesContext";
 import { EntryContainer } from "@/components/entry/EntryContainer";
+import { EntryInterface, Status } from "interfaces/EntriesInterfaces";
 import { EntryActionsButtons } from "@/components/entry/EntryActionsButtons";
 import { EntryStatusSelector } from "@/components/entry/EntryStatusSelector";
 
@@ -22,6 +25,8 @@ interface Props {
 const Entry: NextPage<Props> = ({
   entry: { _id, content, status, createdAt },
 }) => {
+  const router = useRouter();
+  const { updateEntry } = useContext(EntriesContext);
   const [entryStatus, setEntryStatus] = useState<Status>(status);
   const [entryContent, setEntryContent] = useState(content);
 
@@ -29,6 +34,11 @@ const Entry: NextPage<Props> = ({
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setEntryContent(event.target.value);
+  };
+
+  const handleSave = () => {
+    updateEntry(_id, { content: entryContent, status: entryStatus });
+    router.push("/");
   };
 
   return (
@@ -48,7 +58,7 @@ const Entry: NextPage<Props> = ({
           />
         </CardContent>
         <EntryStatusSelector status={entryStatus} setStatus={setEntryStatus} />
-        <EntryActionsButtons id={_id} content={entryContent} />
+        <EntryActionsButtons handleSave={handleSave} />
       </EntryContainer>
     </MainLayout>
   );

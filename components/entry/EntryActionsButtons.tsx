@@ -1,23 +1,14 @@
-import { FC, useContext } from "react";
+import { FC, MouseEventHandler } from "react";
 import { useRouter } from "next/router";
 import { Box, Button, CardActions } from "@mui/material";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
-import { EntriesContext } from "context/entries/EntriesContext";
 
 interface Props {
-  id: string;
-  content: string;
+  handleSave: MouseEventHandler;
 }
 
-export const EntryActionsButtons: FC<Props> = ({ id, content }) => {
+export const EntryActionsButtons: FC<Props> = ({ handleSave }) => {
   const router = useRouter();
-  const { updateEntry } = useContext(EntriesContext);
-
-  const handleSave = () => {
-    updateEntry(id, { content });
-    router.push("/");
-  };
-
   return (
     <CardActions
       disableSpacing
