@@ -1,4 +1,5 @@
 import { ChangeEvent, useContext, useState } from "react";
+import { useSnackbar } from "notistack";
 import { isValidObjectId } from "mongoose";
 import type {
   NextPage,
@@ -26,6 +27,7 @@ const Entry: NextPage<Props> = ({
   entry: { _id, content, status, createdAt },
 }) => {
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
   const { updateEntry } = useContext(EntriesContext);
   const [entryStatus, setEntryStatus] = useState<Status>(status);
   const [entryContent, setEntryContent] = useState(content);
@@ -39,6 +41,13 @@ const Entry: NextPage<Props> = ({
   const handleSave = () => {
     updateEntry(_id, { content: entryContent, status: entryStatus });
     router.push("/");
+    enqueueSnackbar("Entrada actualizada correctamente", {
+      variant: "success",
+      anchorOrigin: {
+        horizontal: "right",
+        vertical: "top",
+      },
+    });
   };
 
   return (
