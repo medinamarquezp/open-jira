@@ -12,6 +12,7 @@ import {
   getEntriesApi,
   createEntryApi,
   updateEntryApi,
+  deleyeEntryApi,
 } from "api/entries/entries.api";
 
 export const toggleState: ToggleState = {
@@ -49,6 +50,11 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Entries] update-entry", payload: { id, entry } });
   };
 
+  const deleteEntry = async (id: string) => {
+    await deleyeEntryApi(id);
+    await refreshEntries();
+  };
+
   const refreshEntries = async () => {
     const entries = await getEntriesApi();
     dispatch({ type: "[Entries] refresh-entries", payload: entries });
@@ -65,6 +71,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
         toggleAddEntry,
         addEntry,
         updateEntry,
+        deleteEntry,
       }}
     >
       {children}

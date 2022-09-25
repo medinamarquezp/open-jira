@@ -9,6 +9,7 @@ export interface EntriesContextInterface {
   toggleAddEntry: (payload: string) => void;
   addEntry: (content: string, status: Status) => void;
   updateEntry: (id: string, entry: PartialEntryInterface) => void;
+  deleteEntry: (id: string) => void;
 }
 
 export interface EntriesProviderInterface {

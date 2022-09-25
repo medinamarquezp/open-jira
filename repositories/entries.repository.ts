@@ -38,3 +38,9 @@ export const updateEntry = async (
   await Entry.updateOne({ _id }, { ...entry });
   await disconnect();
 };
+
+export const deleteEntry = async (_id: string): Promise<void> => {
+  await connect();
+  await Entry.deleteOne({ _id });
+  await disconnect();
+};

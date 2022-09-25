@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext, useState } from "react";
-import { useSnackbar } from "notistack";
+import { OptionsObject, useSnackbar } from "notistack";
 import { isValidObjectId } from "mongoose";
 import type {
   NextPage,
@@ -19,6 +19,14 @@ import { EntryInterface, Status } from "interfaces/EntriesInterfaces";
 import { EntryActionsButtons } from "@/components/entry/EntryActionsButtons";
 import { EntryStatusSelector } from "@/components/entry/EntryStatusSelector";
 
+const snackBarConfiguration: OptionsObject = {
+  variant: "success",
+  anchorOrigin: {
+    horizontal: "right",
+    vertical: "top",
+  },
+};
+
 interface Props {
   entry: EntryInterface;
 }
@@ -28,7 +36,7 @@ const Entry: NextPage<Props> = ({
 }) => {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-  const { updateEntry } = useContext(EntriesContext);
+  const { updateEntry, deleteEntry } = useContext(EntriesContext);
   const [entryStatus, setEntryStatus] = useState<Status>(status);
   const [entryContent, setEntryContent] = useState(content);
 
@@ -41,18 +49,18 @@ const Entry: NextPage<Props> = ({
   const handleSave = () => {
     updateEntry(_id, { content: entryContent, status: entryStatus });
     router.push("/");
-    enqueueSnackbar("Entrada actualizada correctamente", {
-      variant: "success",
-      anchorOrigin: {
-        horizontal: "right",
-        vertical: "top",
-      },
-    });
+    enqueueSnackbar("Entrada actualizada correctamente", snackBarConfiguration);
+  };
+
+  const handleDelete = () => {
+    deleteEntry(_id);
+    router.push("/");
+    enqueueSnackbar("Entrada borrada correctamente", snackBarConfiguration);
   };
 
   return (
     <MainLayout>
-      <EntryContainer>
+      <EntryContainer handleDelete={handleDelete}>
         <CardHeader title={entryContent} subheader={distanteToNow(createdAt)} />
         <CardContent sx={{ marginTop: "-20px" }}>
           <TextField

@@ -29,3 +29,8 @@ export const updateEntryApi = async (
   const path = `/entries/${id}`;
   await client.patch(path, data);
 };
+
+export const deleyeEntryApi = async (id: string) => {
+  const path = `/entries/${id}`;
+  await client.delete(path);
+};
