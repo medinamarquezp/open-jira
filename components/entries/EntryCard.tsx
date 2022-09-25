@@ -1,6 +1,12 @@
 import { DragEvent, FC, useContext } from "react";
 import { useRouter } from "next/router";
-import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { UIContext } from "@/context/ui/UIContext";
 import { distanteToNow } from "services/dates.service";
 
@@ -12,6 +18,7 @@ interface Props {
 
 export const EntryCard: FC<Props> = ({ id, content, createdAt }) => {
   const router = useRouter();
+  const isDarkTheme = useTheme().palette.mode === "dark";
 
   const { toggleDragging, isDragging } = useContext(UIContext);
 
@@ -34,13 +41,13 @@ export const EntryCard: FC<Props> = ({ id, content, createdAt }) => {
       sx={{
         padding: "0.5rem",
         margin: "10px 0",
-        backgroundColor: "black",
+        backgroundColor: isDarkTheme ? "grey.900" : "grey.100",
         whiteSpace: "pre-line",
         transition: "0.3s",
         boxShadow: 0,
         ":hover": {
           cursor: "pointer",
-          backgroundColor: "#212121",
+          backgroundColor: isDarkTheme ? "grey.800" : "grey.300",
         },
       }}
     >
